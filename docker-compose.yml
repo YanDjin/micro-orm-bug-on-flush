@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  api:
+    container_name: api
+    build: .
+    image: node16-nest
+    command: yarn start:debug
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+      - 9229:9229
+
+  database:
+    container_name: database
+    image: postgis/postgis:15-3.3
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    ports:
+      - 5432:5432
